@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AccelrationApp</string>
+    <string name="standsit_test">StandSit Test</string>
+    <string name="button">Button</string>
+    <string name="button">Button</string>
+    <string name="new_user">New User</string>
+    <string name="existing_user">Existing User</string>
+    <string name="personnumer">Personnumer</string>
+    <string name="namn">Namn</string>
+    <string name="lder">Ålder</string>
+    <string name="vikt">Vikt</string>
+    <string name="personnummer">personnummer</string>
+</resources>
