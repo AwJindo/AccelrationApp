@@ -9,6 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AccelrationApp">
+        <activity android:name=".ExistingUserActivity"></activity>
+        <activity android:name=".UserInfoActivity" />
+        <activity android:name=".ShowValuesFromHistoryActivity" />
+        <activity android:name=".AcceptTestValuesActivity" />
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".StopActivity" />
+        <activity android:name=".StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".NewUserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,10 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
-
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
