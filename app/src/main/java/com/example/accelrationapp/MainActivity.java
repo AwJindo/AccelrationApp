@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
     private Button newuser;
     private Button existinguser;
+    private ImageButton bluetoothbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +25,19 @@ public class MainActivity extends AppCompatActivity {
                 openNewUserActivity();
             }
         });
+
         existinguser = (Button) findViewById(R.id.existinguser);
         existinguser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openExistingUserActivity();
             }
+        });
+
+        bluetoothbutton = (ImageButton) findViewById(R.id.bluetoothbutton);
+        bluetoothbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { openBTConectionActivity(); }
         });
     }
 
@@ -38,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void openExistingUserActivity(){
         Intent intent = new Intent(this, ExistingUserActivity.class);
+        startActivity(intent);
+    }
+
+    public void openBTConectionActivity(){
+        Intent intent = new Intent(this, BTConectionActivity.class);
         startActivity(intent);
     }
 }

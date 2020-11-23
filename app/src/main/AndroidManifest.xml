@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.accelrationapp">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,27 +15,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AccelrationApp">
-        <activity android:name=".ExistingUserActivity" android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".BTConectionActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ExistingUserActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".UserInfoActivity"
+            android:parentActivityName=".NewUserActivity" />
+        <activity
+            android:name=".ShowValuesFromHistoryActivity"
+            android:parentActivityName=".HistoryActivity" />
+        <activity android:name=".AcceptTestValuesActivity" />
+        <activity
+            android:name=".HistoryActivity"
+            android:parentActivityName=".UserInfoActivity" />
+        <activity android:name=".StopActivity" />
+        <activity
+            android:name=".StartActivity"
+            android:parentActivityName=".UserInfoActivity" />
+        <activity
+            android:name=".NewUserActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".UserInfoActivity" android:parentActivityName=".NewUserActivity"></activity>
-
-        <activity android:name=".ShowValuesFromHistoryActivity" android:parentActivityName=".HistoryActivity"></activity>
-
-        <activity android:name=".AcceptTestValuesActivity" ></activity>
-        <activity android:name=".HistoryActivity" android:parentActivityName=".UserInfoActivity"></activity>
-
-        <activity android:name=".StopActivity" ></activity>
-
-        <activity android:name=".StartActivity" android:parentActivityName=".UserInfoActivity"></activity>
-
-        <activity android:name=".NewUserActivity" android:parentActivityName=".MainActivity"></activity>
-
-        <activity android:name=".MainActivity" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
