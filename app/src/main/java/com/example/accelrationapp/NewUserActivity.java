@@ -38,7 +38,7 @@ public class NewUserActivity extends AppCompatActivity {
         String text = text_input_name.getText().toString();
 
         EditText text_input_socialnumber = findViewById(R.id.text_input_socialnumber);
-        int number1 = Integer.parseInt(text_input_socialnumber.getText().toString());
+        String number1 = text_input_socialnumber.getText().toString();
 
         EditText text_input_age =  findViewById(R.id.text_input_age);
         int number2 = Integer.parseInt(text_input_age.getText().toString());
@@ -55,7 +55,7 @@ public class NewUserActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_NUMBER1,number1);
         intent.putExtra(EXTRA_NUMBER2,number2);
         intent.putExtra(EXTRA_NUMBER3,number3);
-        intent.putExtra(EXTRA_NUMBER3,number4);
+        intent.putExtra(EXTRA_NUMBER4,number4);
         startActivity(intent);
     }
 }

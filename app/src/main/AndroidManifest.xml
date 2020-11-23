@@ -9,24 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AccelrationApp">
-        <activity android:name=".ExistingUserActivity"></activity>
-        <activity android:name=".UserInfoActivity"
-            android:parentActivityName=".NewUserActivity"></activity>
-        <activity android:name=".ShowValuesFromHistoryActivity" />
-        <activity android:name=".AcceptTestValuesActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".StopActivity" />
-        <activity android:name=".StartActivity"/>
+        <activity android:name=".ExistingUserActivity" android:parentActivityName=".MainActivity"></activity>
 
-        <activity android:name=".NewUserActivity"/>
+        <activity android:name=".UserInfoActivity" android:parentActivityName=".NewUserActivity"></activity>
+
+        <activity android:name=".ShowValuesFromHistoryActivity" android:parentActivityName=".HistoryActivity"></activity>
+
+        <activity android:name=".AcceptTestValuesActivity" ></activity>
+        <activity android:name=".HistoryActivity" android:parentActivityName=".UserInfoActivity"></activity>
+
+        <activity android:name=".StopActivity" ></activity>
+
+        <activity android:name=".StartActivity" android:parentActivityName=".UserInfoActivity"></activity>
+
+        <activity android:name=".NewUserActivity" android:parentActivityName=".MainActivity"></activity>
 
         <activity android:name=".MainActivity" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+        </intent-filter></activity>
     </application>
 
 </manifest>
