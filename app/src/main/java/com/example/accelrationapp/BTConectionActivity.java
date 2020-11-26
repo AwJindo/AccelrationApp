@@ -1,5 +1,6 @@
 package com.example.accelrationapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -61,7 +62,7 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(mBluetoothAdapter.ACTION_SCAN_MODE_CHANGED)) {
+            if (action.equals(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED)) {
                 int mode = intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE, BluetoothAdapter.ERROR);
 
                 switch (mode){
@@ -105,6 +106,7 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
     private final BroadcastReceiver mBroadcastReceiver4 = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+
             final String action = intent.getAction();
 
             if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)){
@@ -125,14 +127,15 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
             }
         }
     };
-/*
-    @Override
+
+   /* @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy: called.");
         unregisterReceiver(mBroadcastReceiver1);
         unregisterReceiver(mBroadcastReceiver2);
         unregisterReceiver(mBroadcastReceiver3);
+        unregisterReceiver(mBroadcastReceiver4);
     }*/
 
     @Override
@@ -151,6 +154,8 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         newdevices.setOnItemClickListener(BTConectionActivity.this);
+
+
 
         buttononoff.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,10 +194,11 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         startActivity(discoverableIntent);
 
-        IntentFilter intentFilter = new IntentFilter(mBluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
+        IntentFilter intentFilter = new IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
         registerReceiver(mBroadcastReceiver2, intentFilter);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void buttondiscover(View view) {                             //Todo: Can't bond, but can start bonding. Doesnt seem to find new devices. BT_Priviliged red i MANIFEST (might be problem)
         Log.d(TAG, "buttondiscover: looking for unpaired devices.");
 
@@ -216,6 +222,7 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkBTPermissions() {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
             int permissioncheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
@@ -237,10 +244,10 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
 
         Log.d(TAG, "onItemClick: you clicked on a device");
         String deviceName = mBTDevices.get(position).getName();
-        String deviceAddress = mBTDevices.get(position).getAddress();
+        String deviceAdress = mBTDevices.get(position).getAddress();
 
         Log.d(TAG, "onItemClick: deviceName = " + deviceName);
-        Log.d(TAG, "onItemClick: deviceAddress = " + deviceAddress);
+        Log.d(TAG, "onItemClick: deviceAddress = " + deviceAdress);
 
         //create bond, requires API17+
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){

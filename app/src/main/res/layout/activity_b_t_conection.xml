@@ -52,7 +52,7 @@
     <ListView
         android:id="@+id/newdevices"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="300dp"
         android:layout_below="@+id/buttonfind"
         android:layout_marginTop="50dp"/>
 
