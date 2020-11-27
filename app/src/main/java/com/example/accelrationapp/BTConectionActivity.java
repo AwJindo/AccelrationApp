@@ -142,17 +142,16 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_b_t_conection);
-        buttononoff = (Button) findViewById(R.id.buttononoff);
-        enablediscover = (Button) findViewById(R.id.enablediscover);
-        newdevices = (ListView) findViewById(R.id.newdevices);
+        buttononoff = (Button) findViewById(R.id.buttononoff);                                      //button to put on or off bluetooth
+        enablediscover = (Button) findViewById(R.id.enablediscover);                                //button for devices to discover our device
+        newdevices = (ListView) findViewById(R.id.newdevices);                                      //listview of our new devices
         mBTDevices = new ArrayList<>();
 
         //Broadcasts when band state changes (pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(mBroadcastReceiver4, filter);
 
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                                   //variable for the bluetoothadapter
         newdevices.setOnItemClickListener(BTConectionActivity.this);
 
 
@@ -166,11 +165,11 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
         });
     }
 
-    public void enableDisableBT(){
+    public void enableDisableBT(){                                                                  //function for put on or off button
         if(mBluetoothAdapter == null){
             Log.d(TAG, "enableDisableBT: Does not have BT capabilities.");
         }
-        if(!mBluetoothAdapter.isEnabled()){
+        if(!mBluetoothAdapter.isEnabled()){                                                         //if bluetooth disable, enable bluetooth
             Log.d(TAG, "enableDisableBT: enabling BT.");
             Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivity(enableBTIntent);
@@ -178,7 +177,7 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
             IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
             registerReceiver(mBroadcastReceiver1,BTIntent);
         }
-        if (mBluetoothAdapter.isEnabled()){
+        if (mBluetoothAdapter.isEnabled()){                                                         //if bluetooth disable, disable bluetooth
             Log.d(TAG, "enableDisableBT: disabling BT.");
             mBluetoothAdapter.disable();
 
@@ -187,22 +186,22 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
         }
     }
 
-    public void buttonEnDiDiscoverable(View view) {
+    public void buttonEnDiDiscoverable(View view) {                                                 //function for our device to be discoreable
         Log.d(TAG, "buttonEnDiDiscoverable: Making device Discoverable for 300s.");
 
         Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-        startActivity(discoverableIntent);
+        startActivity(discoverableIntent);                                                          //make our device discoverable for other devices for 300sec
 
         IntentFilter intentFilter = new IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
         registerReceiver(mBroadcastReceiver2, intentFilter);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void buttondiscover(View view) {                             //Todo: Can't bond, but can start bonding. Doesnt seem to find new devices. BT_Priviliged red i MANIFEST (might be problem)
+    public void buttondiscover(View view) {                                                         //function to se available bluetooth devices
         Log.d(TAG, "buttondiscover: looking for unpaired devices.");
 
-        if(mBluetoothAdapter.isDiscovering()){
+        if(mBluetoothAdapter.isDiscovering()){                                                      //if we are discovering devices, we need to cancel it in order to start it again
             mBluetoothAdapter.cancelDiscovery();
             Log.d(TAG, "buttondiscover: Canceling discovery.");
 
@@ -212,7 +211,7 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
             IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
             registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
         }
-        if(!mBluetoothAdapter.isDiscovering()){
+        if(!mBluetoothAdapter.isDiscovering()){                                                     // if discovering devices isnt on, enable discovering.
 
             checkBTPermissions();
 
@@ -238,12 +237,11 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //first cancel disccovery because it is very memory intensive
-        mBluetoothAdapter.cancelDiscovery();
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {              //function for pairing and bonding devices
+        mBluetoothAdapter.cancelDiscovery();                                                        //first cancel disccovery because it is very memory intensive
 
         Log.d(TAG, "onItemClick: you clicked on a device");
-        String deviceName = mBTDevices.get(position).getName();
+        String deviceName = mBTDevices.get(position).getName();                                     //when we click on a deevice, we get make a string of their name and adress
         String deviceAdress = mBTDevices.get(position).getAddress();
 
         Log.d(TAG, "onItemClick: deviceName = " + deviceName);
@@ -252,7 +250,7 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
         //create bond, requires API17+
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){
             Log.d(TAG, "onItemClick: Trying to pair with " + deviceName);
-            mBTDevices.get(position).createBond();
+            mBTDevices.get(position).createBond();                                                  //we try to pair with the device we click on.
         }
     }
 }
