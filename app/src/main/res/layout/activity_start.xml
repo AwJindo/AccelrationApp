@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/start"
+        android:id="@+id/starttest"
         android:layout_width="390dp"
         android:layout_height="121dp"
         android:text="Start"
