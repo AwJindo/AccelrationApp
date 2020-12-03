@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +33,7 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
     public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
     public DeviceListAdapter mDeviceListAdapter;
     ListView newdevices;
+    BluetoothGatt bluetoothGatt;
 
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
@@ -128,6 +132,7 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
         }
     };
 
+
    /* @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -164,6 +169,7 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
             }
         });
     }
+
 
     public void enableDisableBT(){                                                                  //function for put on or off button
         if(mBluetoothAdapter == null){
@@ -250,7 +256,14 @@ public class BTConectionActivity extends AppCompatActivity implements AdapterVie
         //create bond, requires API17+
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){
             Log.d(TAG, "onItemClick: Trying to pair with " + deviceName);
-            mBTDevices.get(position).createBond();                                                  //we try to pair with the device we click on.
+            mBTDevices.get(position).connectGatt(this,true,btleGattCallback);                                                  //we try to pair with the device we click on.
         }
     }
+
+    private final BluetoothGattCallback btleGattCallback = new BluetoothGattCallback() {
+        @Override
+        public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+            super.onCharacteristicChanged(gatt, characteristic);
+        }
+    };
 }
