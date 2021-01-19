@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         bluetoothbutton = (ImageButton) findViewById(R.id.bluetoothbutton);
         bluetoothbutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { openBTConectionActivity(); }
+            public void onClick(View v) { openBTConnectionActivity(); }
         });
     }
 
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openBTConectionActivity(){
-        Intent intent = new Intent(this, BTConectionActivity.class);
+    public void openBTConnectionActivity(){
+        Intent intent = new Intent(this, BTConnectionActivity.class);
         startActivity(intent);
     }
 }

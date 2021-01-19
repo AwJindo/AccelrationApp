@@ -25,6 +25,7 @@ public class StopActivity extends AppCompatActivity {
     }
 
     public void openTestResultActivity(){
+        DeviceControlActivity.readData=false;
         Intent intent = new Intent(this,TestResultActivity.class);
         startActivity(intent);
     }

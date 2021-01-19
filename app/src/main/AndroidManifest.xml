@@ -17,8 +17,11 @@
         android:theme="@style/Theme.AccelrationApp">
         <activity android:name=".TestResultActivity"></activity>
         <activity
-            android:name=".BTConectionActivity"
+            android:name=".BTConnectionActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DeviceControlActivity"
+            android:parentActivityName=".BTConnectionActivity" />
         <activity
             android:name=".ExistingUserActivity"
             android:parentActivityName=".MainActivity" />

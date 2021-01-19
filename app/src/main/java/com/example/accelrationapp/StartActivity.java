@@ -24,6 +24,8 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void openStopActivity(){
+        DeviceControlActivity.ArrData.clear();
+        DeviceControlActivity.readData=true;
         Intent intent = new Intent(this, StopActivity.class);
         startActivity(intent);
     }
