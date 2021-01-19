@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.accelrationapp">
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AccelrationApp">
+        <activity android:name=".TestResultActivity"></activity>
+        <activity
+            android:name=".BTConnectionActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DeviceControlActivity"
+            android:parentActivityName=".BTConnectionActivity" />
+        <activity
+            android:name=".ExistingUserActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".UserInfoActivity"
+            android:parentActivityName=".NewUserActivity" />
+        <activity
+            android:name=".ShowValuesFromHistoryActivity"
+            android:parentActivityName=".HistoryActivity" />
+        <activity android:name=".AcceptTestValuesActivity" />
+        <activity
+            android:name=".HistoryActivity"
+            android:parentActivityName=".UserInfoActivity" />
+        <activity android:name=".StopActivity" />
+        <activity
+            android:name=".StartActivity"
+            android:parentActivityName=".UserInfoActivity" />
+        <activity
+            android:name=".NewUserActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
